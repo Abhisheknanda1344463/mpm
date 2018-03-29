@@ -17,7 +17,8 @@
                             </div>
                             
                             <div class="modal-body">
-                                <%= form_for :invitation , url: invitations_get_email_path(account_id: @account.id) do |form|%>
+	     
+					    <%= form_for :invitation , url: invitations_get_email_path(account_id: @account_id) do |form|%>
                                     <div class="form-control">
                                         <%= form.label :email %>
                                             <br/>

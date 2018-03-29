@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
-
-#def get_email 
+ 
     def get_email
+
         @email = valid_params[:email]
         @account_id = valid_params[:account_id]    
         check = User.find_by(email: @email)
@@ -29,4 +29,17 @@ class InvitationsController < ApplicationController
         end
     end
 
-end
+   
+     def create
+	     @invite = Invitation.new(valid_params)
+     end
+
+
+     private
+
+    def valid_params
+	    params.require(:invitation).permit(:email,:account_id)
+    end
+
+    end
+
