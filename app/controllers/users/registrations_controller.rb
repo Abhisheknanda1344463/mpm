@@ -9,10 +9,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
  
-  def new
-    @user = User.new
-    @account = @user.accounts.build
-  end
    
   # POST /resource
   # def create

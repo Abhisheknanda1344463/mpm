@@ -1,0 +1,68 @@
+<%if show_add_user_or_not(current_user.id) == "Owner"%>
+<div class="container-fluid">
+        <div class="col-md-12">
+            <div class="row">
+              <h1 class="text text-primary"><%=@account.account_name%> Team </h1>
+
+              <h2>saahclkc</h2>
+                <a id="modal-366601" href="#modal-container-366601" role="button" class="btn" data-toggle="modal">Add Users</a>
+                <div class="modal fade" id="modal-container-366601" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Invite Users for <%= @account.account_name%></h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <%= form_for :invitation , url: invitations_get_email_path(account_id: @account.id) do |form|%>
+                                    <div class="form-control">
+                                        <%= form.label :email %>
+                                            <br/>
+                                            <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+                                            <%= form.hidden_field :account_id , :value => @account.id %>
+                                        </div>
+                                    <div class="modal-footer">
+                                        <%= form.submit "Invite" %>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                    </div>
+                                <%end%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%end%>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-sm table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Sr.no</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%count = 0%>
+                    <%@users.each do |user|%>
+                        <tr class="table-warning">
+                            <td><%=count+=1%></td>
+                            <td><%=user.name%></td>
+                            <td><%=user.email%></td>
+                            <td><%=member_or_owner(user.id)%></td>
+                        </tr>
+                    <%end%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
