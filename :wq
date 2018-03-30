@@ -1,0 +1,9 @@
+<div class = "col-md-3">
+<% @accounts.each do |account| %>
+  <ul class="list-group">
+  <li class="list-group-item active">Accounts</li>
+  <a href="<%= account_path(account.id) %>">
+  <h4><li class="list-group-item"><%=account.account_name%></li></h4>
+  </ul/>
+   <% end %>
+</div>

@@ -6,12 +6,13 @@
 		      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
           </head>
 
-        <body>
-		    <p>
-		    <a data-method="get" href="http://localhost:3000/check?email=abhisheknanda72@gmail.com&amp;account_id=1">Accept Request</a> 
-		          </p>
+          <body>
+            <p>
 
-			    </body>
+     <%= link_to "Accept Request","http://192.168.33.10:3000/check?email=#{@email}&account_id=#{@ac_id}" , method: :get%>
+             </p>
+
+          </body>
 </html>
 
 
