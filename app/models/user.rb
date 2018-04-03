@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 attr_accessor :account_name,:acc_id1,:email1
 
+  
 after_create :create_accounts
 
   devise :database_authenticatable, :registerable,
