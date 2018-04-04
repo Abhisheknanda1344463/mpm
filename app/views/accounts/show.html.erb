@@ -1,4 +1,5 @@
-  <div class="container-fluid">
+<%if show_add_user_or_not(current_user.id) == "Owner"%>
+<div class="container-fluid">
         <div class="col-md-12">
             <div class="row">
               <h1 class="text text-primary"><%=@account.account_name%> Team </h1>
@@ -54,7 +55,7 @@
                             </div>
                             
                             <div class="modal-body">
-                                <%= form_for :team , url: account_teams_path(account_id: @account.id) do |form|%>
+                                <%= form_for :team , url: account_teams_path(account_id: params[:id]) do |form|%>
                                     <div class="form-control">
                                         <%= form.label :Team_name %>
                                             <br/>
@@ -70,7 +71,10 @@
                     </div>
                 </div>
   
+              <% end %>
 
+
+              <h3 class="row d-flex justify-content-center mt-3"><%= @account.account_name%> Dashboard</h3>
 <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
 <div class="row d-flex justify-content-center mt-5">
   <div class="col-md-10">
@@ -78,16 +82,19 @@
       <thead class="thead-light">
         <tr class="d-flex">
           <th class="col-2">
-            Sr.no
+            Sr.no<i class="fa fa-fw fa-sort"></i>
           </th>
           <th class="col-2">
-             NAME
+             NAME <i class="fa fa-fw fa-sort"></i>
           </th>
-          <th class="col-5">
-            Email
+          <th class="col-4">
+            Email <i class="fa fa-fw fa-sort"></i>
           </th>
-          <th class="col-3">
-            Status
+          <th class="col-2">
+            Status <i class="fa fa-fw fa-sort"></i>
+          </th>
+          <th class="col-2">
+            Action
           </th>
         </tr>
       </thead>
@@ -101,8 +108,13 @@
             <td class="col-2">
               <%= user.name %>
             </td>
-            <td class="col-5">
+            <td class="col-4">
               <%= user.email%>
+            </td>
+            <td class="col-2">
+              <%=member_or_owner(user.id)%>
+            </td>
+            <td class="col-2">
             </td>
           </tr>
         <% end %>
@@ -117,7 +129,8 @@
 <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
   <div class="card-header">Team</div>
   <div class="card-body">
-    <h5 class="card-title"><%= u.Team_name%></h5>
+    <a href="<%= account_team_path(@account,u)%>">
+      <h5 class="card-title"><%= u.Team_name%></h5></a>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
   </div>
 </div>

@@ -31,7 +31,8 @@ def show
         @users.push(u)
         end
       @users
-      @teams =Team.all 
+
+      @teams = Team.where(account_id: @account.id) 
 
 end
  

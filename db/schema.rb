@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403101353) do
+ActiveRecord::Schema.define(version: 20180404123819) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "account_name"
@@ -29,10 +29,16 @@ ActiveRecord::Schema.define(version: 20180403101353) do
     t.index ["account_id", "email"], name: "index_invitations_on_account_id_and_email", unique: true
   end
 
+  create_table "members", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "Team_name"
     t.integer "account_id"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

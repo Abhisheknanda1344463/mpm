@@ -6,6 +6,7 @@ resources :accounts do
 end
  
 post 'invitations/get_email'
+post 'teams/get_user'
 get 'check' => 'invitations#check_user'
 
   root 'accounts#index'
