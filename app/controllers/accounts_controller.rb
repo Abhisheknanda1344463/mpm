@@ -3,29 +3,16 @@ class AccountsController < ApplicationController
  before_action :authenticate_user!
 
 def index
-        user_id = current_user.id
-        check_for_account = Account.find_by(user_id: user_id)
-        if check_for_account == nil
-            #normal user
-            @accounts = Array.new
-            @invitations = Invitation.where(user_id: user_id)
-            @invitations.each do |invite|
-                acc_id = invite.account_id
-                account = Account.find_by(id: acc_id)
-                @accounts.push(account)
-                end
-            @accounts
-        else
-            @accounts = Account.where(user_id: current_user.id)
-        end
+  @accounts = Account.all_accs(current_user)
  end
 
 def show
+
   @account = Account.find(params[:id])
   @users_in_account = Invitation.where(account_id: @account.id)
   @users = Array.new
-      @users_in_account.each do |u|
-        user_id = u.user_id
+  @users_in_account.each do |u|
+      user_id = u.user_id
         u = User.find_by(id: user_id)
         debugger
         @users.push(u)
@@ -43,3 +30,27 @@ private
    end
 
 end
+     def users_in_accounts(account) #show page of particular account..
+      owner = owner_of_account(account)
+      users_in_account = all_invitations_through_account_id(account)
+      @users = []
+      @users.push(owner)
+      users_in_account.each do |user|
+        if user.user_id.present?
+          user = User.find_by(id: user.user_id)
+          @users.push(user)
+        end
+      end
+       @users
+    end
+
+    def all_invitations_through_account_id(account)
+       Invitation.where(account_id: account.id)
+    en
+    d
+    def owner_of_account(account)
+       User.find_by(id: account.user_id)
+    end
+  end
+end
+ 

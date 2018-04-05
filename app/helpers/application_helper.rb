@@ -1,21 +1,19 @@
 module ApplicationHelper
 
-def member_or_owner(user_id)
-        check = Account.find_by(user_id: user_id)
-         if check == nil
-             return "Member"
-         else
-             return "Owner"
-        end
+  def member_or_owner(user_id,account)
+    if user_id == account.user_id
+      return "Owner"
+    else
+      return "Member"
     end
-    def show_add_user_or_not(user_id)
-        check = Account.find_by(user_id: user_id)
-         if check == nil
-             return "Member"
-         else
-             return "Owner"
-        end
-        
-    end 
+  end
 
-end
+  def owner(account)
+    @owner = User.find_by(id: account.user_id)
+     return @owner.name
+  end
+   
+  end
+
+
+

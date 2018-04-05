@@ -1,17 +1,18 @@
-
-<div class="card bg-light mt-3 ml-3" style="max-width: 20rem;">
-  <div class="card-header">Accounts</div>
-  <div class="card-body">
-    <p class="card-text">
-     <% @accounts.each do |account|%>
-                              <a href="<%= account_path(account.id) %>">
-                                <h4><%= account.account_name %></h4>
-                              </a>
-                              <p>owner:(<%=current_user.email%>)</p>
-                          </div>
-        <%end%></p>
-
-
-
+  <div class ="row"> 
+   <% @accounts.each do |account|%>
+     <div class = "col-md-2 ml-2 mt-4">
+     <div class="card bg-light" style="max-width: 20rem;">
+     <div class="card-header">Accounts</div>
+     <div class="card-body">
+     <p class="card-text ">
+          <a href="<%= account_path(account.id) %>">
+          <h4><%=account.account_name %></h4></a>
+          <p>owner name:(<%=owner(account)%>)</p>
+    </p>
+  </div>
+</div>
+  </div>
+<% end %>
+</div>
 
 

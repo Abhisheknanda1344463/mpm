@@ -1,10 +1,9 @@
-<%if show_add_user_or_not(current_user.id) == "Owner"%>
+<%if member_or_owner(current_user.id,@account) == "Owner"%>
 <div class="container-fluid">
-        <div class="col-md-12">
-            <div class="row">
-              <h1 class="text text-primary"><%=@account.account_name%> Team </h1>
+  <div class="col-md-12">
 
-                <a id="modal-366601" href="#modal-container-366601" role="button" class="btn" data-toggle="modal">Add Users</a>
+            <div class="row float-right">
+                <a id="modal-366601" href="#modal-container-366601" role="button" class="btn btn-success" data-toggle="modal">Add Users</a>
                 <div class="modal fade" id="modal-container-366601" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -20,14 +19,11 @@
                                     <div class="form-control">
                                         <%= form.label :email %>
                                             <br/>
-                                            <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+                                            <%= form.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
                                             <%= form.hidden_field :account_id , :value => @account.id %>
                                         </div>
                                     <div class="modal-footer">
-                                        <%= form.submit "Invite" %>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                Close
-                                            </button>
+                                        <%= form.submit "Invite" ,class: "btn btn-danger" %>
                                     </div>
                                 <%end%>
                             </div>
@@ -36,14 +32,12 @@
                 </div>
             </div>
         </div>
-  </div>
 
 
 
 
 
-                <a id="modal-3666010" href="#modal-container-3666010" role="button" class="btn btn-primary float-right" data-toggle="modal">Add Teams</a>
-                
+                <a id="modal-3666010" href="#modal-container-3666010" role="button" class="btn btn-primary float-right mr-4" data-toggle="modal">Add Teams</a>
                 <div class="modal fade" id="modal-container-3666010" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -72,11 +66,11 @@
                 </div>
   
               <% end %>
-
+</div>
 
               <h3 class="row d-flex justify-content-center mt-3"><%= @account.account_name%> Dashboard</h3>
 <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
-<div class="row d-flex justify-content-center mt-5">
+<div class="row d-flex justify-content-center mt-3">
   <div class="col-md-10">
     <table class="table table-hover sortable border bg-light">
       <thead class="thead-light">
@@ -112,7 +106,7 @@
               <%= user.email%>
             </td>
             <td class="col-2">
-              <%=member_or_owner(user.id)%>
+              <%=member_or_owner(user.id ,@account)%>
             </td>
             <td class="col-2">
             </td>
@@ -124,9 +118,9 @@
 </div>
 
 <div class ="row">
-  <div class = "col-md-4 mt-4 ml-4">
+  <div class = "col-md-2 ml-4">
 <% @teams.each do |u| %>
-<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+<div class="card bg-light" style="max-width: 18rem;">
   <div class="card-header">Team</div>
   <div class="card-body">
     <a href="<%= account_team_path(@account,u)%>">
@@ -134,9 +128,9 @@
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
   </div>
 </div>
-<% end %>
   </div>
+<% end %>
   <div>
-
+    
 
 
